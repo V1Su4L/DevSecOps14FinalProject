@@ -51,4 +51,4 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pytest --no-tests-ok
+          pytest || [$? -eq 5]
