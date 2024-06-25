@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Container, TextField, Button, Typography, List, ListItem, ListItemText, Alert } from '@mui/material';
 import './Check.css';
 
 // Use the IP address of your Ingress
@@ -46,38 +45,31 @@ function Check() {
   };
 
   return (
-    <Container maxWidth="sm" className="container">
-      <Typography variant="h3" gutterBottom className="title">Social Media Search</Typography>
-      <Typography variant="body1" gutterBottom className="description">
-        Enter a name to search for profiles on various social media platforms.
-      </Typography>
+    <div className="container">
+      <h1 className="title">Social Media Search</h1>
+      <p className="description">Enter a name to search for profiles on various social media platforms.</p>
       <div className="input-container">
-        <TextField
+        <input
+          type="text"
           value={name}
           onChange={handleInputChange}
-          label="Enter name"
-          variant="outlined"
-          fullWidth
           className="input"
+          placeholder="Enter name"
         />
-        <Button
+        <button
           onClick={handleSearch}
-          variant="contained"
-          color="primary"
           className="button"
         >
           Search
-        </Button>
+        </button>
       </div>
-      {error && <Alert severity="error" className="error">{error}</Alert>}
-      <List className="result-list">
+      {error && <p className="error">Error: {error}</p>}
+      <ul className="result-list">
         {result.map((url, index) => (
-          <ListItem key={index} className="result-item">
-            <ListItemText primary={url} />
-          </ListItem>
+          <li key={index} className="result-item">{url}</li>
         ))}
-      </List>
-    </Container>
+      </ul>
+    </div>
   );
 }
 
