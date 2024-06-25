@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Container, TextField, Button, Typography, List, ListItem, ListItemText, Alert } from '@mui/material';
 import './Check.css';
 
+// Use the IP address of your Ingress
 const API_URL = 'http://104.197.99.174:5001/api';
 
 function Check() {
@@ -43,22 +45,39 @@ function Check() {
     }
   };
 
-
   return (
-    <div className="container">
-      <h1 className="title">Social Media Search</h1>
-      <p className="description">Enter a name to search for profiles on various social media platforms.</p>
+    <Container maxWidth="sm" className="container">
+      <Typography variant="h3" gutterBottom className="title">Social Media Search</Typography>
+      <Typography variant="body1" gutterBottom className="description">
+        Enter a name to search for profiles on various social media platforms.
+      </Typography>
       <div className="input-container">
-        <input type="text" value={name} onChange={handleInputChange} className="input" placeholder="Enter name" />
-        <button onClick={handleSearch} className="button">Search</button>
+        <TextField
+          value={name}
+          onChange={handleInputChange}
+          label="Enter name"
+          variant="outlined"
+          fullWidth
+          className="input"
+        />
+        <Button
+          onClick={handleSearch}
+          variant="contained"
+          color="primary"
+          className="button"
+        >
+          Search
+        </Button>
       </div>
-      {error && <p className="error">Error: {error}</p>}
-      <ul className="result-list">
+      {error && <Alert severity="error" className="error">{error}</Alert>}
+      <List className="result-list">
         {result.map((url, index) => (
-          <li key={index} className="result-item">{url}</li>
+          <ListItem key={index} className="result-item">
+            <ListItemText primary={url} />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 }
 
